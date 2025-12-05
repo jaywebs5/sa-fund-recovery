@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>SA Fund Recovery — Client Intake (WhatsApp)</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:Segoe UI,Arial,Helvetica,sans-serif}
+  body{background:#e6f0fa;color:#003366}
+  .container{max-width:820px;margin:36px auto;background:#fff;padding:30px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+  header{text-align:center;margin-bottom:18px}
+  header img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #0057b8;margin-bottom:8px}
+  h1{font-size:24px;color:#003366;margin-bottom:4px}
+  p.subtitle{color:#555;margin-bottom:18px}
+  .progress{display:flex;gap:8px;align-items:center;margin-bottom:18px}
+  .step-dot{width:30px;height:30px;border-radius:50%;background:#ccc;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .step-dot.active{background:linear-gradient(135deg,#0057b8,#0099ff)}
+  .bar{flex:1;height:6px;background:#ddd;border-radius:4px}
+  .bar.active{background:linear-gradient(135deg,#0057b8,#0099ff)}
+  form{display:block}
+  .step{display:none}
+  .step.active{display:block}
+  label{display:block;margin:10px 0 6px;font-weight:600;color:#003366}
+  .required::after{content:" *";color:#e03b3b}
+  input[type=text],input[type=email],input[type=number],input[type=date],select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #ccd7e6;font-size:14px}
+  textarea{min-height:120px;resize:vertical}
+  .row{display:flex;gap:10px}
+  .btn{display:inline-block;padding:12px 18px;border-radius:8px;border:0;background:linear-gradient(135deg,#0057b8,#0099ff);color:#fff;font-weight:700;cursor:pointer;margin-top:12px}
+  .btn.secondary{background:#e0e4ea;color:#222;margin-left:8px}
+  .note{font-size:13px;color:#666;margin-top:8px}
+  .privacy{margin-top:18px;padding:12px;background:#eef6ff;border-left:4px solid #0057b8;border-radius:6px;color:#444}
+  .success{display:none;margin-top:12px;padding:12px;background:#e6ffed;border-left:4px solid #1e9b3a;border-radius:6px;color:#155f15;font-weight:700}
+  @media(max-width:720px){.row{flex-direction:column}.btn.secondary{margin-left:0;width:100%;margin-top:8px}}
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://i.postimg.cc/dtS0nhFX/IMG-20251201-WA0006.jpg" alt="SA Fund Recovery Logo">
+      <h1>SA FUND RECOVERY — Client Intake</h1>
+      <p class="subtitle">Complete the steps and we’ll open WhatsApp with a prefilled message — just press Send.</p>
+    </header>
+
+    <div class="progress" aria-hidden>
+      <div class="step-dot active" data-step="1">1</div>
+      <div class="bar"></div>
+      <div class="step-dot" data-step="2">2</div>
+      <div class="bar"></div>
+      <div class="step-dot" data-step="3">3</div>
+    </div>
+
+    <form id="wizardForm">
+
+      <!-- STEP 1 -->
+      <div class="step active" data-step="1">
+        <label class="required" for="fullName">Full name</label>
+        <input id="fullName" name="fullName" type="text" required>
+
+        <label class="required" for="email">Email address</label>
+        <input id="email" name="email" type="email" required>
+
+        <label class="required" for="phone">Phone number</label>
+        <input id="phone" name="phone" type="text" placeholder="+27..." required>
+
+        <div style="margin-top:12px">
+          <button type="button" class="btn" id="toStep2">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step" data-step="2">
+        <label for="contactMethod">Preferred contact method</label>
+        <select id="contactMethod" name="contactMethod">
+          <option>Email</option><option>Phone</option><option>WhatsApp</option>
+        </select>
+
+        <label class="required" for="issueType">Type of issue</label>
+        <select id="issueType" name="issueType" required>
+          <option value="">Select issue</option>
+          <option>Investment scam</option>
+          <option>Unauthorized deduction</option>
+          <option>Online purchase scam</option>
+          <option>Fraudulent website</option>
+          <option>Other</option>
+        </select>
+
+        <div class="row">
+          <div style="flex:1">
+            <label for="amount">Amount lost (ZAR)</label>
+            <input id="amount" name="amount" type="number" min="0" placeholder="e.g. 4500">
+          </div>
+          <div style="width:200px">
+            <label for="dateIncident">Date of incident</label>
+            <input id="dateIncident" name="dateIncident" type="date">
+          </div>
+        </div>
+
+        <label for="platform">Platform / person involved (if known)</label>
+        <input id="platform" name="platform" type="text" placeholder="Website, company or person">
+
+        <div style="margin-top:8px">
+          <button type="button" class="btn secondary" id="backTo1">Back</button>
+          <button type="button" class="btn" id="toStep3">Next</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step" data-step="3">
+        <label class="required" for="description">Description (what happened)</label>
+        <textarea id="description" name="description" required placeholder="Give as much detail as you can..."></textarea>
+
+        <label for="evidence">Attach evidence (optional)</label>
+        <input id="evidence" name="evidence" type="file" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+        <div class="note">Files cannot be auto-attached — after WhatsApp opens, attach them manually.</div>
+
+        <div style="margin-top:12px">
+          <label><input id="confirm1" type="checkbox" required> I confirm the information is accurate</label><br>
+          <label><input id="confirm2" type="checkbox" required> I understand SA Fund Recovery will never ask for OTPs, banking passwords or card details</label>
+        </div>
+
+        <div style="margin-top:12px">
+          <button type="button" class="btn secondary" id="backTo2">Back</button>
+          <button type="button" class="btn" id="sendWhatsAppBtn">Send to WhatsApp</button>
+        </div>
+
+        <div class="success" id="sentNotice">WhatsApp should open now — press Send to complete.</div>
+      </div>
+
+      <div class="privacy">
+        <strong>Privacy note:</strong> This form only builds a WhatsApp message. You control sending — nothing is sent without your action.
+      </div>
+    </form>
+  </div>
+
+<script>
+  // wizard controls
+  const steps = Array.from(document.querySelectorAll('.step'));
+  const dots = Array.from(document.querySelectorAll('.step-dot'));
+  const bars = Array.from(document.querySelectorAll('.bar'));
+  function showStep(idx){
+    steps.forEach((s,i)=> s.classList.toggle('active', i===idx));
+    dots.forEach((d,i)=> {
+      d.classList.toggle('active', i===idx);
+      d.classList.toggle('completed', i<idx);
+    });
+    bars.forEach((b,i)=> b.classList.toggle('active', i<idx));
+  }
+
+  document.getElementById('toStep2').addEventListener('click', () => {
+    const name = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if(!name){ alert('Please enter your full name'); return; }
+    if(!email || !email.includes('@')){ alert('Please enter a valid email'); return; }
+    if(!phone){ alert('Please enter your phone number'); return; }
+    showStep(1);
+  });
+
+  document.getElementById('backTo1').addEventListener('click', ()=> showStep(0));
+
+  document.getElementById('toStep3').addEventListener('click', () => {
+    const issue = document.getElementById('issueType').value;
+    if(!issue){ alert('Please select the type of issue'); return; }
+    showStep(2);
+  });
+
+  document.getElementById('backTo2').addEventListener('click', ()=> showStep(1));
+
+  // build WhatsApp message
+  document.getElementById('sendWhatsAppBtn').addEventListener('click', () => {
+
+    const desc = document.getElementById('description').value.trim();
+    if(!desc){ alert('Please provide a description'); return; }
+    if(!document.getElementById('confirm1').checked || !document.getElementById('confirm2').checked){
+      alert('Please complete the confirmations'); return;
+    }
+
+    // Your WhatsApp number fixed here:
+    const recipient = "+27744597810";
+
+    const fields = {
+      'Full name': document.getElementById('fullName').value.trim(),
+      'Email': document.getElementById('email').value.trim(),
+      'Phone': document.getElementById('phone').value.trim(),
+      'Preferred contact': document.getElementById('contactMethod').value,
+      'Issue type': document.getElementById('issueType').value,
+      'Amount (ZAR)': document.getElementById('amount').value || '-',
+      'Date of incident': document.getElementById('dateIncident').value || '-',
+      'Platform / person': document.getElementById('platform').value || '-',
+      'Description': desc
+    };
+
+    let text = '*SA Fund Recovery — New Case Submission*%0A%0A';
+    for(const k in fields){
+      const line = `*${k}:* ${fields[k]}`;
+      text += encodeURIComponent(line) + '%0A';
+    }
+    text += '%0A';
+    text += encodeURIComponent('Attach any relevant files or screenshots after WhatsApp opens.');
+
+    const num = recipient.replace('+','');
+
+    const url = `https://wa.me/${num}?text=${text}`;
+
+    window.open(url, '_blank');
+
+    document.getElementById('sentNotice').style.display = 'block';
+
+    setTimeout(()=> {
+      showStep(0);
+      document.getElementById('wizardForm').reset();
+      document.getElementById('sentNotice').style.display = 'none';
+    }, 3500);
+  });
+</script>
+</body>
+</html>
