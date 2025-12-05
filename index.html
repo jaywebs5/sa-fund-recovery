@@ -1890,6 +1890,12 @@
             // User database stored in localStorage
             let users = JSON.parse(localStorage.getItem('users')) || {};
             
+            // Check if user is already logged in
+            const currentUserEmail = localStorage.getItem('currentUser');
+            if (currentUserEmail && users[currentUserEmail]) {
+                showDashboard(users[currentUserEmail]);
+            }
+            
             // DOM Elements
             const loginBtn = document.getElementById('loginBtn');
             const registerBtn = document.getElementById('registerBtn');
@@ -1974,6 +1980,28 @@
                 document.getElementById('activityBalance').textContent = formatCurrency(userData.totalProfit) + '.00';
             }
             
+            // Show dashboard with user data
+            function showDashboard(user) {
+                closeLoginModal();
+                dashboard.style.display = 'block';
+                document.getElementById('userName').textContent = user.name;
+                updateDashboard(user.data);
+                
+                // Update header buttons
+                document.querySelector('.auth-buttons').style.display = 'none';
+                const dashboardNavItem = document.createElement('li');
+                dashboardNavItem.innerHTML = `<a href="#dashboard" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>`;
+                navMenu.appendChild(dashboardNavItem);
+                
+                // Scroll to dashboard
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: dashboard.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }, 100);
+            }
+            
             // Input validation
             function validateInput(input) {
                 input.value = input.value.replace(/[^0-9.]/g, '');
@@ -2049,7 +2077,11 @@
             
             loginBtn.addEventListener('click', showLoginModal);
             heroLoginBtn.addEventListener('click', showLoginModal);
-            registerBtn.addEventListener('click', showLoginModal);
+            registerBtn.addEventListener('click', function() {
+                showLoginModal();
+                // Switch to register tab
+                tabs[1].click();
+            });
             
             // Close modal
             function closeLoginModal() {
@@ -2083,28 +2115,24 @@
                 });
             });
             
-            // Login form submission
+            // Login form submission - AUTO REDIRECT TO DASHBOARD
             loginForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const email = document.getElementById('loginEmail').value;
                 const password = document.getElementById('loginPassword').value;
                 
                 if (users[email] && users[email].password === password) {
-                    closeLoginModal();
-                    dashboard.style.display = 'block';
-                    document.getElementById('userName').textContent = users[email].name;
-                    updateDashboard(users[email].data);
+                    // Save current user to localStorage
+                    localStorage.setItem('currentUser', email);
                     
-                    window.scrollTo({
-                        top: dashboard.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                    // Show success message and redirect to dashboard
+                    showDashboard(users[email]);
                 } else {
                     alert('Invalid email or password. Please try again.');
                 }
             });
             
-            // Register form submission
+            // Register form submission - AUTO REDIRECT TO DASHBOARD
             registerForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 const name = document.getElementById('registerName').value;
@@ -2120,19 +2148,26 @@
                     
                     if (users[email]) {
                         alert('An account with this email already exists. Please log in instead.');
+                        tabs[0].click();
                         return;
                     }
                     
+                    // Create new user with random data
+                    const userData = generateUserData();
                     users[email] = {
                         name: name,
                         password: password,
-                        data: generateUserData()
+                        data: userData
                     };
                     
+                    // Save to localStorage
                     localStorage.setItem('users', JSON.stringify(users));
-                    alert('Registration successful! Your account has been created.');
-                    closeLoginModal();
-                    tabs[0].click();
+                    localStorage.setItem('currentUser', email);
+                    
+                    // Show success message and redirect to dashboard
+                    showDashboard(users[email]);
+                    
+                    // Clear the form
                     registerForm.reset();
                 } else {
                     alert('Please fill in all fields.');
@@ -2141,7 +2176,19 @@
             
             // Logout functionality
             logoutBtn.addEventListener('click', function() {
+                localStorage.removeItem('currentUser');
                 dashboard.style.display = 'none';
+                
+                // Restore header buttons
+                document.querySelector('.auth-buttons').style.display = 'flex';
+                
+                // Remove dashboard nav item
+                const dashboardNavItem = document.querySelector('nav ul li:last-child');
+                if (dashboardNavItem && dashboardNavItem.querySelector('a[href="#dashboard"]')) {
+                    dashboardNavItem.remove();
+                }
+                
+                // Scroll to top
                 window.scrollTo({
                     top: 0,
                     behavior: 'smooth'
