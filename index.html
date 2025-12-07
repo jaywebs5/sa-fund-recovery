@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SA Fund Recovery | Professional Financial Recovery Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #111111;
+            --accent: #ff3b30;
+            --success: #34c759;
+            --warning: #ff9500;
+            --light: #0a0a0a;
+            --dark: #f5f5f7;
+            --gray: #8e8e93;
+            --border: #222222;
+            --shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #ffffff;
+            background-color: #000000;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #000000;
+            padding: 0.8rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            transition: all 0.4s ease;
+            border-bottom: 1px solid #222222;
+            backdrop-filter: blur(10px);
+        }
+        
+        header.hidden {
+            transform: translateY(-100%);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .logo-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo:hover .logo-image {
+            transform: scale(1.05);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.8rem;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+            position: relative;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ffffff;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a:hover {
+            color: #f0f0f0;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+        }
+        
+        .btn:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,255,255,0.2);
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #ffffff;
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: #000000;
+            color: #ffffff;
+            padding: 10rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #222222;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.03)"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #cccccc;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 0;
+            background-color: #111111;
+            border-top: 1px solid #222222;
+            border-bottom: 1px solid #222222;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials-container {
+            position: relative;
+            width: 100%;
+        }
+        
+        .testimonials-track {
+            display: flex;
+            gap: 2.5rem;
+            animation: scrollTestimonials 40s linear infinite;
+            padding: 1rem 0;
+        }
+        
+        .testimonial-card {
+            flex: 0 0 auto;
+            width: 350px;
+            background-color: #000000;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid #222222;
+            transition: transform 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffffff;
+        }
+        
+        .testimonial-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cccccc;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #222222;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ffffff;
+        }
+        
+        .author-info h4 {
+            color: #ffffff;
+            margin-bottom: 0.3rem;
+        }
+        
+        .author-info p {
+            color: #8e8e93;
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-rating {
+            color: #ff9500;
+            margin-bottom: 1rem;
+        }
+        
+        /* Testimonials fade gradients */
+        .testimonials::before,
+        .testimonials::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .testimonials::before {
+            left: 0;
+            background: linear-gradient(to right, #111111, transparent);
+        }
+        
+        .testimonials::after {
+            right: 0;
+            background: linear-gradient(to left, #111111, transparent);
+        }
+        
+        @keyframes scrollTestimonials {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-350px * 6 - 2.5rem * 6));
+            }
+        }
+        
+        /* Auto-scrolling Partners Section */
+        .partners-scroll {
+            padding: 3rem 0;
+            background-color: #ffffff !important;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .partners-scroll::before,
+        .partners-scroll::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        .partners-scroll::before {
+            left: 0;
+            background: linear-gradient(to right, #ffffff, transparent);
+        }
+        
+        .partners-scroll::after {
+            right: 0;
+            background: linear-gradient(to left, #ffffff, transparent);
+        }
+        
+        .partners-track {
+            display: flex;
+            animation: scroll 40s linear infinite;
+            gap: 4rem;
+            padding: 0 2rem;
+        }
+        
+        .partner-item {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 200px;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            border: 1px solid #e1e5eb;
+        }
+        
+        .partner-item:hover {
+            transform: translateY(-5px);
+            border-color: #ccc;
+        }
+        
+        .partner-logo-scroll {
+            height: 60px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .partner-logo-scroll img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            filter: none !important;
+        }
+        
+        .partner-name {
+            font-weight: 600;
+            color: #000000 !important;
+            text-align: center;
+        }
+        
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-200px * 11 - 4rem * 11));
+            }
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            padding: 3rem 0;
+            display: none;
+            background-color: #000000;
+            min-height: 80vh;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #222222;
+        }
+        
+        .user-welcome h2 {
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .user-welcome p {
+            color: #8e8e93;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .dashboard-card {
+            background-color: #111111;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #222222;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            border-color: #333333;
+        }
+        
+        .dashboard-card h3 {
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .amount {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 1rem 0;
+            color: #ffffff;
+        }
+        
+        .profit {
+            color: #34c759;
+        }
+        
+        .loss {
+            color: #ff3b30;
+        }
+        
+        .fee {
+            color: #ff9500;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #222222;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #ffffff 0%, #888 100%);
+            border-radius: 5px;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #222222;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #8e8e93;
+            margin-top: 0.3rem;
+        }
+        
+        /* Calculator */
+        .calculator {
+            padding: 5rem 0;
+            background-color: #000000;
+            border-top: 1px solid #222222;
+            border-bottom: 1px solid #222222;
+        }
+        
+        .calculator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .calculator-form {
+            background-color: #111111;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid #222222;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: #000000;
+            border: 1px solid #222222;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border 0.3s;
+            color: #ffffff;
+        }
+        
+        .form-control:focus {
+            border-color: #ffffff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.1);
+        }
+        
+        .results {
+            background: linear-gradient(135deg, #111111 0%, #000000 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #222222;
+        }
+        
+        .results h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+        
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #222222;
+        }
+        
+        .result-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .result-label {
+            color: #cccccc;
+        }
+        
+        .result-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+        
+        .highlight {
+            background-color: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            border: 1px solid #222222;
+        }
+        
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background-color: #111111;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: modalAppear 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+            border: 1px solid #222222;
+        }
+        
+        .compact-form {
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-bottom: 1rem;
+        }
+        
+        .compact-form::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .compact-form::-webkit-scrollbar-track {
+            background: #111111;
+            border-radius: 10px;
+        }
+        
+        .compact-form::-webkit-scrollbar-thumb {
+            background: #222222;
+            border-radius: 10px;
+        }
+        
+        @keyframes modalAppear {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header h2 {
+            color: #ffffff;
+            font-size: 1.5rem;
+        }
+        
+        .close-modal {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #8e8e93;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #ffffff;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid #222222;
+        }
+        
+        .tab {
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #8e8e93;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid #ffffff;
+            color: #ffffff;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Payment Gateway */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+        }
+        
+        .payment-content {
+            background-color: #111111;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border: 1px solid #222222;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .payment-header {
+            padding: 2rem;
+            border-bottom: 1px solid #222222;
+            position: sticky;
+            top: 0;
+            background-color: #111111;
+            z-index: 1;
+        }
+        
+        .payment-header h3 {
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        
+        .payment-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #34c759;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .payment-body {
+            padding: 0 2rem 2rem;
+        }
+        
+        .payment-details {
+            background-color: #000000;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border: 1px solid #222222;
+        }
+        
+        .payment-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #222222;
+        }
+        
+        .payment-row:last-child {
+            border-bottom: none;
+        }
+        
+        .payment-label {
+            color: #cccccc;
+        }
+        
+        .payment-value {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        
+        .payment-methods {
+            margin-bottom: 2rem;
+        }
+        
+        .payment-method {
+            background-color: #000000;
+            border: 1px solid #222222;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .payment-method:hover {
+            border-color: #ffffff;
+            background-color: #111111;
+        }
+        
+        .payment-method.selected {
+            border-color: #34c759;
+            background-color: rgba(52, 199, 89, 0.1);
+        }
+        
+        .method-icon {
+            font-size: 1.8rem;
+            color: #34c759;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(52, 199, 89, 0.1);
+            border-radius: 8px;
+        }
+        
+        .method-info h4 {
+            color: #ffffff;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+        
+        .method-info p {
+            color: #8e8e93;
+            font-size: 0.9rem;
+        }
+        
+        .bank-transfer-info {
+            background-color: rgba(255, 193, 7, 0.1);
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: #ffc107;
+        }
+        
+        .payment-actions {
+            padding: 0 2rem 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .payment-actions .btn {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .payment-success {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .payment-success i {
+            font-size: 4rem;
+            color: #34c759;
+            margin-bottom: 1.5rem;
+        }
+        
+        .payment-success h3 {
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .payment-success p {
+            color: #8e8e93;
+            margin-bottom: 2rem;
+        }
+        
+        /* Real Payment Gateways */
+        .real-payment-gateway {
+            background-color: #000000;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid #222222;
+            display: none;
+        }
+        
+        .real-payment-gateway.active {
+            display: block;
+        }
+        
+        .payment-iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            border-radius: 8px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #000000;
+            color: white;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid #222222;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+            color: #8e8e93;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #8e8e93;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #ffffff;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #222222;
+            color: #8e8e93;
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: #111111;
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s, transform 0.3s;
+            border: 1px solid #222222;
+        }
+        
+        .social-links a:hover {
+            background-color: #222222;
+            transform: translateY(-3px);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .calculator-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: rgba(0,0,0,0.98);
+                flex-direction: column;
+                padding: 1rem 0;
+                border-top: 1px solid #222222;
+                border-bottom: 1px solid #222222;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                text-align: center;
+                padding: 0.8rem 0;
+            }
+            
+            .auth-buttons {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .payment-content {
+                max-height: 95vh;
+            }
+            
+            .payment-body {
+                padding: 1.5rem;
+            }
+            
+            .payment-actions {
+                padding: 0 1.5rem 1.5rem;
+                flex-direction: column;
+            }
+            
+            .testimonial-card {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="https://i.postimg.cc/dtS0nhFX/IMG-20251201-WA0006.jpg" alt="SA Fund Recovery Logo" class="logo-image">
+                </a>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#calculator">Calculator</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="loginBtn">Client Login</button>
+                    <button class="btn" id="registerBtn">Open Account</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Professional Fund Recovery & Financial Protection</h1>
+                <p>SA Fund Recovery specializes in helping South African individuals and businesses recover funds lost to online scams, fraudulent investments, and financial misconduct.</p>
+                <div class="hero-buttons">
+                    <button class="btn" id="heroLoginBtn">Client Portal</button>
+                    <button class="btn btn-outline">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Client Success Stories</h2>
+                <p>See what our clients have to say about their fund recovery experience</p>
+            </div>
+            
+            <div class="testimonials-container">
+                <div class="testimonials-track">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            "SA Fund Recovery helped me recover R450,000 that I lost to a binary options scam. Their team was professional, transparent, and kept me updated throughout the entire process."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Michael Botha</h4>
+                                <p>Recovered R450,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            "After losing R280,000 to a forex trading platform, I thought all hope was lost. SA Fund Recovery not only recovered my funds but also helped me understand how to avoid future scams."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Sarah Peterson</h4>
+                                <p>Recovered R280,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            "The team at SA Fund Recovery was exceptional. They recovered 85% of my investment from a fraudulent cryptocurrency platform. Their expertise in financial recovery is unmatched."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Client" class="author-avatar">
+                            <div class="author-info">
+                                <h4>David van Niekerk</h4>
+                                <p>Recovered R620,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            "I was skeptical at first, but SA Fund Recovery proved their worth. They recovered R380,000 from a fake investment scheme and guided me through every step of the process."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Client" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Lisa Pretorius</h4>
+                                <p>Recovered R380,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            "Professional service from start to finish. They recovered R520,000 from a crypto scam and provided excellent support throughout. Highly recommended!"
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client" class="author-avatar">
+                            <div class="author-info">
+                                <h4>James Wilson</h4>
+                                <p>Recovered R520,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="testimonial-content">
+                            "Outstanding service! Recovered R310,000 from an online trading scam. The team was knowledgeable and communicated clearly at every stage of the recovery process."
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Client" class="author-avatar">
+                            <div class="author-info">
+                                <h4>Maria Garcia</h4>
+                                <p>Recovered R310,000</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Auto-scrolling Partners Section -->
+    <section class="partners-scroll">
+        <div class="partners-track">
+            <!-- Partner items -->
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa">
+                </div>
+                <div class="partner-name">Visa</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://retail-today.com/wp-content/uploads/2020/03/forter-696x464.jpg" alt="Forter">
+                </div>
+                <div class="partner-name">Forter</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://datadome.co/wp-content/uploads/2022/01/DataDome-Logo.jpg" alt="DataDome">
+                </div>
+                <div class="partner-name">DataDome</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://mms.businesswire.com/media/20171024005894/en/603962/21/NamogooLogo.jpg" alt="Namogoo">
+                </div>
+                <div class="partner-name">Namogoo</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://www.wefightfraud.org/wp-content/uploads/2020/05/Wff-icons-WFF-BLACK-TEXT-1.png" alt="We Fight Fraud">
+                </div>
+                <div class="partner-name">We Fight Fraud</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://images.squarespace-cdn.com/content/v1/67c01676ab8ced3e8108b266/bce3c2a8-1580-44c0-826a-54ecb2e6ad5b/Tech-Against-Scams-Coalition-logo-2-v2.png?format=1500w" alt="Tech Against Scams">
+                </div>
+                <div class="partner-name">Tech Against Scams</div>
+            </div>
+            <!-- Duplicate for seamless scrolling -->
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa">
+                </div>
+                <div class="partner-name">Visa</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://retail-today.com/wp-content/uploads/2020/03/forter-696x464.jpg" alt="Forter">
+                </div>
+                <div class="partner-name">Forter</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://datadome.co/wp-content/uploads/2022/01/DataDome-Logo.jpg" alt="DataDome">
+                </div>
+                <div class="partner-name">DataDome</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://mms.businesswire.com/media/20171024005894/en/603962/21/NamogooLogo.jpg" alt="Namogoo">
+                </div>
+                <div class="partner-name">Namogoo</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-logo-scroll">
+                    <img src="https://www.wefightfraud.org/wp-content/uploads/2020/05/Wff-icons-WFF-BLACK-TEXT-1.png" alt="We Fight Fraud">
+                </div>
+                <div class="partner-name">We Fight Fraud</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="user-welcome">
+                    <h2>Welcome back, <span id="userName">Pieter van der Merwe</span></h2>
+                    <p>Here's your financial recovery overview</p>
+                </div>
+                <div class="user-actions">
+                    <button class="btn btn-outline" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-chart-line"></i> Investment Summary</h3>
+                    <p>Initial Investment</p>
+                    <div class="amount">R <span id="initialAmount">250,000</span></div>
+                    <p>Current Portfolio Value</p>
+                    <div class="amount profit">R <span id="currentAmount">610,500</span></div>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 144%" id="progressBar"></div>
+                    </div>
+                    <p><span id="growthPercent">144</span>% Growth | +R <span id="profitAmount">360,500</span></p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value" id="avgMonthly">18%</div>
+                            <div class="stat-label">Avg. Monthly</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="months">12</div>
+                            <div class="stat-label">Months</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">R <span id="monthlyProfit">45,000</span></div>
+                            <div class="stat-label">Monthly Profit</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-hand-holding-usd"></i> Withdrawal Details</h3>
+                    <p>Available for Withdrawal</p>
+                    <div class="amount">R <span id="availableAmount">360,500</span></div>
+                    <p>Withdrawal Fee (25%)</p>
+                    <div class="amount fee">R <span id="feeAmount">90,125</span></div>
+                    <p>Net Withdrawal Amount</p>
+                    <div class="amount profit">R <span id="netAmount">270,375</span></div>
+                    <button class="btn" style="margin-top: 1.5rem; width: 100%;" id="withdrawalBtn">
+                        <i class="fas fa-download"></i> Request Withdrawal
+                    </button>
+                    <p style="font-size: 0.85rem; color: var(--gray); margin-top: 1rem;">
+                        <i class="fas fa-info-circle"></i> Withdrawal processing takes 5-7 business days
+                    </p>
+                </div>
+                
+                <div class="dashboard-card">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Recovery Status</h3>
+                    <p>Case Status: <strong style="color: var(--warning);">Under Investigation</strong></p>
+                    <p>Estimated Recovery: <strong>85% of lost funds</strong></p>
+                    <div class="progress-bar">
+                        <div class="progress" style="width: 65%"></div>
+                    </div>
+                    <p>Recovery Progress: 65% Complete</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Days Active</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">3</div>
+                            <div class="stat-label">Documents</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">85%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                <div class="result-item">
+                    <span>Initial Investment</span>
+                    <span class="loss">-R <span id="activityInitial">250,000.00</span></span>
+                </div>
+                <div class="result-item">
+                    <span>Monthly Profit (March)</span>
+                    <span class="profit">+R <span id="activityProfit1">45,000.00</span></span>
+                </div>
+                <div class="result-item">
+                    <span>Monthly Profit (April)</span>
+                    <span class="profit">+R <span id="activityProfit2">42,500.00</span></span>
+                </div>
+                <div class="result-item">
+                    <span>Account Maintenance Fee</span>
+                    <span class="fee">-R <span id="activityFee">2,500.00</span></span>
+                </div>
+                <div class="result-item">
+                    <span><strong>Available Balance</strong></span>
+                    <span class="profit"><strong>R <span id="activityBalance">360,500.00</span></strong></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="calculator" id="calculator">
+        <div class="container">
+            <div class="section-header">
+                <h2>Investment Profit Calculator</h2>
+                <p>Estimate your potential returns and understand withdrawal fees before investing</p>
+            </div>
+            
+            <div class="calculator-container">
+                <div class="calculator-form">
+                    <div class="form-group">
+                        <label for="initialInvestment">Initial Investment Amount (R)</label>
+                        <input type="number" id="initialInvestment" class="form-control" min="0" step="1000" value="250000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="investmentPeriod">Investment Period (Months)</label>
+                        <input type="number" id="investmentPeriod" class="form-control" min="1" max="60" value="12">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="monthlyProfit">Monthly Profit Percentage (%)</label>
+                        <input type="number" id="monthlyProfit" class="form-control" min="1" max="100" value="15">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="withdrawalFee">Withdrawal Fee Percentage (%)</label>
+                        <input type="number" id="withdrawalFee" class="form-control" min="0" max="100" value="25">
+                    </div>
+                    
+                    <button class="btn" id="calculateBtn" style="width: 100%;">
+                        <i class="fas fa-calculator"></i> Calculate Profit & Fees
+                    </button>
+                </div>
+                
+                <div class="results" id="results">
+                    <h3>Your Investment Analysis</h3>
+                    <div class="result-item">
+                        <span class="result-label">Initial Investment:</span>
+                        <span class="result-value">R <span id="resultInitial">250,000</span></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Total Profit Generated:</span>
+                        <span class="result-value">R <span id="resultProfit">360,500</span></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Current Portfolio Value:</span>
+                        <span class="result-value">R <span id="resultTotal">610,500</span></span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Withdrawal Fee (<span id="resultFeePercent">25</span>%):</span>
+                        <span class="result-value">R <span id="resultFee">90,125</span></span>
+                    </div>
+                    <div class="highlight">
+                        <div class="result-item">
+                            <span class="result-label">Net Withdrawal Amount:</span>
+                            <span class="result-value" style="font-size: 1.3rem;">R <span id="resultNet">270,375</span></span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1.5rem; color: #cccccc; font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> These calculations are estimates. Actual returns may vary based on market conditions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Client Portal Access</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            
+            <div class="tabs">
+                <div class="tab active" data-tab="login">Login</div>
+                <div class="tab" data-tab="register">Register</div>
+            </div>
+            
+            <div class="tab-content active" id="login-tab">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" class="form-control" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" class="form-control" required placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <input type="checkbox" id="rememberMe">
+                            <label for="rememberMe" style="display: inline; margin-left: 5px; color: #cccccc;">Remember me</label>
+                        </div>
+                        <a href="#" style="color: #ffffff; text-decoration: none; font-size: 0.9rem;">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-sign-in-alt"></i> Login to Account
+                    </button>
+                </form>
+            </div>
+            
+            <div class="tab-content" id="register-tab">
+                <div class="compact-form">
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="registerName">Full Name</label>
+                            <input type="text" id="registerName" class="form-control" required placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerEmail">Email Address</label>
+                            <input type="email" id="registerEmail" class="form-control" required placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPhone">Phone Number</label>
+                            <input type="tel" id="registerPhone" class="form-control" required placeholder="Enter your phone number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" id="registerPassword" class="form-control" required placeholder="Create a password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerConfirm">Confirm Password</label>
+                            <input type="password" id="registerConfirm" class="form-control" required placeholder="Confirm your password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <label for="agreeTerms" style="display: inline; margin-left: 5px; font-size: 0.85rem; color: #cccccc;">I agree to the <a href="#" style="color: #ffffff;">Terms of Service</a> and <a href="#" style="color: #ffffff;">Privacy Policy</a></label>
+                        </div>
+                    </form>
+                </div>
+                <button type="submit" form="registerForm" class="btn" style="width: 100%;">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Gateway Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-content">
+            <div class="payment-header">
+                <h3>Pay Withdrawal Fee</h3>
+                <p>Complete payment to process your withdrawal request</p>
+                <div class="payment-amount" id="paymentAmount">R 90,125</div>
+            </div>
+            
+            <div class="payment-body">
+                <div class="payment-details">
+                    <div class="payment-row">
+                        <span class="payment-label">Withdrawal Amount:</span>
+                        <span class="payment-value" id="withdrawalAmount">R 360,500</span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="payment-label">Fee Percentage:</span>
+                        <span class="payment-value">10%</span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="payment-label">Net Amount After Fee:</span>
+                        <span class="payment-value" style="color: #34c759;">R <span id="paymentNetAmount">270,375</span></span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="payment-label">Reference Number:</span>
+                        <span class="payment-value" style="font-family: monospace;">WF<span id="paymentReference">2025001</span></span>
+                    </div>
+                </div>
+                
+                <div class="payment-methods">
+                    <div class="payment-method" data-method="paystack">
+                        <div class="method-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="method-info">
+                            <h4>Credit/Debit Card</h4>
+                            <p>Visa, Mastercard, Verve</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-method" data-method="bank">
+                        <div class="method-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <div class="method-info">
+                            <h4>Bank Transfer</h4>
+                            <p>Direct transfer to our account</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-method" data-method="flutterwave">
+                        <div class="method-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="method-info">
+                            <h4>Mobile Money</h4>
+                            <p>Pay with mobile wallet</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Paystack Payment Gateway -->
+                <div class="real-payment-gateway" id="paystackGateway">
+                    <div class="bank-transfer-info">
+                        <i class="fas fa-university"></i>
+                        <strong>Pay with Paystack:</strong><br>
+                        <p>You will be redirected to Paystack's secure payment page to complete your transaction.</p>
+                    </div>
+                </div>
+                
+                <!-- Bank Transfer Info -->
+                <div class="real-payment-gateway" id="bankGateway">
+                    <div class="bank-transfer-info">
+                        <i class="fas fa-university"></i>
+                        <strong>Bank Transfer Details:</strong><br>
+                        Bank: Standard Bank South Africa<br>
+                        Account: SA Fund Recovery Pty Ltd<br>
+                        Account: 0123456789<br>
+                        Branch: 051001<br>
+                        SWIFT: SBZAZAJJ<br>
+                        Amount: R <span id="bankAmount">90,125</span><br>
+                        Reference: WF<span id="bankReference">2025001</span><br><br>
+                        <small>Email proof of payment to: safundrecovery@gmail.com</small>
+                    </div>
+                </div>
+                
+                <!-- Flutterwave Payment Gateway -->
+                <div class="real-payment-gateway" id="flutterwaveGateway">
+                    <div class="bank-transfer-info">
+                        <i class="fas fa-mobile-alt"></i>
+                        <strong>Mobile Money Payment:</strong><br>
+                        <p>You will be redirected to Flutterwave's secure payment page for mobile money transactions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-actions">
+                <button class="btn btn-outline" id="cancelPaymentBtn">
+                    Cancel
+                </button>
+                <button class="btn" id="proceedPaymentBtn" style="background-color: #34c759;">
+                    <i class="fas fa-lock"></i> Proceed to Payment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Success Modal -->
+    <div class="payment-modal" id="paymentSuccessModal">
+        <div class="payment-content">
+            <div class="payment-success">
+                <i class="fas fa-check-circle"></i>
+                <h3>Payment Successful!</h3>
+                <p>Your withdrawal request has been submitted successfully.</p>
+                
+                <div class="payment-details" style="margin-top: 2rem;">
+                    <div class="payment-row">
+                        <span class="payment-label">Reference Number:</span>
+                        <span class="payment-value" id="successReference">WF2025001</span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="payment-label">Payment Amount:</span>
+                        <span class="payment-value">R <span id="successAmount">90,125</span></span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="payment-label">Net Withdrawal:</span>
+                        <span class="payment-value" style="color: #34c759;">R <span id="successNetAmount">270,375</span></span>
+                    </div>
+                    <div class="payment-row">
+                        <span class="payment-label">Processing Time:</span>
+                        <span class="payment-value">5-7 business days</span>
+                    </div>
+                </div>
+                
+                <button class="btn" id="closeSuccessBtn" style="width: 100%; margin-top: 2rem;">
+                    <i class="fas fa-check"></i> Return to Dashboard
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>SA Fund Recovery</h3>
+                    <p style="color: #8e8e93;">Professional fund recovery services with a proven track record of success in helping South African clients recover lost investments.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Investment Recovery</a></li>
+                        <li><a href="#">Cryptocurrency Scams</a></li>
+                        <li><a href="#">Forex & Trading Fraud</a></li>
+                        <li><a href="#">Bank Transfer Recovery</a></li>
+                        <li><a href="#">Legal Consultation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 5026 Sandton City, Johannesburg, SA</li>
+                        <li><i class="fas fa-phone"></i> +27 60 5064 784</li>
+                        <li><i class="fas fa-envelope"></i> safundrecovery@gmail.com</li>
+                        <li><i class="far fa-clock"></i> Mon-Fri: 9AM-6PM SAST</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SA Fund Recovery. All rights reserved.</p>
+                <p>Registered Financial Services Provider | FSP No: 12345</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // REAL PAYMENT GATEWAY INTEGRATION
+        class RealPaymentGateway {
+            constructor() {
+                this.publicKey = 'pk_test_YOUR_PUBLIC_KEY'; // Replace with your Paystack public key
+                this.flutterwaveKey = 'FLWPUBK_TEST_YOUR_PUBLIC_KEY'; // Replace with your Flutterwave key
+            }
+            
+            async processPaystackPayment(email, amount, reference) {
+                // In a real implementation, you would:
+                // 1. Initialize Paystack with your public key
+                // 2. Create a transaction
+                // 3. Redirect to Paystack payment page
+                
+                // For demo purposes, we'll simulate the payment
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            success: true,
+                            reference: reference,
+                            message: 'Payment processed successfully'
+                        });
+                    }, 2000);
+                });
+            }
+            
+            async processFlutterwavePayment(email, amount, reference) {
+                // In a real implementation, you would:
+                // 1. Initialize Flutterwave with your public key
+                // 2. Create a payment modal
+                // 3. Handle the callback
+                
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            success: true,
+                            reference: reference,
+                            message: 'Payment processed successfully'
+                        });
+                    }, 2000);
+                });
+            }
+            
+            generateBankTransferDetails(amount, reference) {
+                return {
+                    bank: 'Standard Bank South Africa',
+                    accountName: 'SA Fund Recovery Pty Ltd',
+                    accountNumber: '0123456789',
+                    branchCode: '051001',
+                    swiftCode: 'SBZAZAJJ',
+                    amount: amount,
+                    reference: reference
+                };
+            }
+        }
+        
+        // Enhanced Database with Real Payments
+        class UserDatabase {
+            constructor() {
+                this.users = JSON.parse(localStorage.getItem('sa_fund_users')) || {};
+                this.withdrawals = JSON.parse(localStorage.getItem('sa_fund_withdrawals')) || [];
+                this.currentUser = null;
+                this.paymentGateway = new RealPaymentGateway();
+            }
+            
+            saveUsers() {
+                localStorage.setItem('sa_fund_users', JSON.stringify(this.users));
+            }
+            
+            saveWithdrawals() {
+                localStorage.setItem('sa_fund_withdrawals', JSON.stringify(this.withdrawals));
+            }
+            
+            generateUserId() {
+                return 'user_' + Date.now().toString(36) + Math.random().toString(36).substr(2);
+            }
+            
+            generateWithdrawalId() {
+                return 'WF' + Date.now().toString().slice(-6);
+            }
+            
+            generateInvestmentData(email) {
+                let hash = 0;
+                for (let i = 0; i < email.length; i++) {
+                    hash = email.charCodeAt(i) + ((hash << 5) - hash);
+                }
+                
+                const investmentRanges = [
+                    { min: 50000, max: 150000 },
+                    { min: 150000, max: 300000 },
+                    { min: 300000, max: 500000 },
+                    { min: 500000, max: 750000 }
+                ];
+                
+                const rangeIndex = Math.abs(hash) % investmentRanges.length;
+                const range = investmentRanges[rangeIndex];
+                
+                const initialInvestment = range.min + (Math.abs(hash) % (range.max - range.min));
+                const months = 6 + (Math.abs(hash) % 31);
+                const monthlyProfitPercent = 12 + (Math.abs(hash) % 14);
+                const totalProfit = Math.round(initialInvestment * (monthlyProfitPercent / 100) * months);
+                const currentValue = initialInvestment + totalProfit;
+                
+                return {
+                    initial: initialInvestment,
+                    current: currentValue,
+                    months: months,
+                    monthlyReturn: monthlyProfitPercent,
+                    totalProfit: totalProfit,
+                    available: totalProfit,
+                    originalInitial: initialInvestment,
+                    originalMonths: months,
+                    originalMonthlyReturn: monthlyProfitPercent
+                };
+            }
+            
+            register(email, password, name, phone) {
+                if (this.users[email]) {
+                    return { success: false, message: 'Email already registered' };
+                }
+                
+                const userId = this.generateUserId();
+                const investmentData = this.generateInvestmentData(email);
+                
+                this.users[email] = {
+                    id: userId,
+                    email: email,
+                    password: password,
+                    name: name,
+                    phone: phone,
+                    registered: new Date().toISOString(),
+                    investment: investmentData,
+                    lastLogin: new Date().toISOString(),
+                    firstLogin: true
+                };
+                
+                this.saveUsers();
+                return { success: true, user: this.users[email] };
+            }
+            
+            login(email, password) {
+                const user = this.users[email];
+                if (user && user.password === password) {
+                    this.currentUser = user;
+                    user.lastLogin = new Date().toISOString();
+                    this.updateUserInvestment(email);
+                    this.saveUsers();
+                    return { success: true, user: user };
+                }
+                return { success: false, message: 'Invalid email or password' };
+            }
+            
+            updateUserInvestment(email) {
+                const user = this.users[email];
+                if (!user || !user.investment) return;
+                
+                const investment = user.investment;
+                const now = new Date();
+                const registeredDate = new Date(user.registered);
+                const daysSinceRegistration = Math.floor((now - registeredDate) / (1000 * 60 * 60 * 24));
+                
+                if (investment.originalInitial && daysSinceRegistration > 0) {
+                    const dailyReturnRate = (investment.originalMonthlyReturn / 100) / 30;
+                    const daysPassed = Math.min(daysSinceRegistration, investment.originalMonths * 30);
+                    const newTotalProfit = Math.round(
+                        investment.originalInitial * dailyReturnRate * daysPassed
+                    );
+                    
+                    investment.totalProfit = newTotalProfit;
+                    investment.current = investment.originalInitial + newTotalProfit;
+                    investment.available = newTotalProfit;
+                    
+                    const monthsPassed = Math.floor(daysPassed / 30);
+                    investment.months = Math.max(1, Math.min(investment.originalMonths, monthsPassed));
+                }
+            }
+            
+            logout() {
+                this.currentUser = null;
+            }
+            
+            getCurrentUser() {
+                return this.currentUser;
+            }
+            
+            async createWithdrawal(userEmail, amount, fee, netAmount, paymentMethod, paymentDetails = {}) {
+                const withdrawalId = this.generateWithdrawalId();
+                const withdrawal = {
+                    id: withdrawalId,
+                    userEmail: userEmail,
+                    amount: amount,
+                    fee: fee,
+                    netAmount: netAmount,
+                    paymentMethod: paymentMethod,
+                    paymentDetails: paymentDetails,
+                    date: new Date().toISOString(),
+                    status: 'pending',
+                    reference: withdrawalId,
+                    transactionId: 'TX' + Date.now().toString().slice(-8)
+                };
+                
+                this.withdrawals.push(withdrawal);
+                this.saveWithdrawals();
+                
+                if (this.users[userEmail]) {
+                    this.users[userEmail].investment.available = 0;
+                    this.saveUsers();
+                }
+                
+                return withdrawal;
+            }
+            
+            getUserWithdrawals(userEmail) {
+                return this.withdrawals.filter(w => w.userEmail === userEmail);
+            }
+        }
+        
+        // Initialize Database
+        const database = new UserDatabase();
+        
+        // DOM Elements
+        const elements = {
+            loginBtn: document.getElementById('loginBtn'),
+            registerBtn: document.getElementById('registerBtn'),
+            heroLoginBtn: document.getElementById('heroLoginBtn'),
+            logoutBtn: document.getElementById('logoutBtn'),
+            withdrawalBtn: document.getElementById('withdrawalBtn'),
+            loginModal: document.getElementById('loginModal'),
+            paymentModal: document.getElementById('paymentModal'),
+            paymentSuccessModal: document.getElementById('paymentSuccessModal'),
+            closeModal: document.querySelector('.close-modal'),
+            tabs: document.querySelectorAll('.tab'),
+            tabContents: document.querySelectorAll('.tab-content'),
+            loginForm: document.getElementById('loginForm'),
+            registerForm: document.getElementById('registerForm'),
+            dashboard: document.getElementById('dashboard'),
+            calculateBtn: document.getElementById('calculateBtn'),
+            paymentMethods: document.querySelectorAll('.payment-method'),
+            confirmPaymentBtn: document.getElementById('proceedPaymentBtn'),
+            cancelPaymentBtn: document.getElementById('cancelPaymentBtn'),
+            closeSuccessBtn: document.getElementById('closeSuccessBtn'),
+            
+            // Dashboard elements
+            userName: document.getElementById('userName'),
+            initialAmount: document.getElementById('initialAmount'),
+            currentAmount: document.getElementById('currentAmount'),
+            profitAmount: document.getElementById('profitAmount'),
+            growthPercent: document.getElementById('growthPercent'),
+            progressBar: document.getElementById('progressBar'),
+            avgMonthly: document.getElementById('avgMonthly'),
+            months: document.getElementById('months'),
+            monthlyProfit: document.getElementById('monthlyProfit'),
+            availableAmount: document.getElementById('availableAmount'),
+            feeAmount: document.getElementById('feeAmount'),
+            netAmount: document.getElementById('netAmount'),
+            activityInitial: document.getElementById('activityInitial'),
+            activityProfit1: document.getElementById('activityProfit1'),
+            activityProfit2: document.getElementById('activityProfit2'),
+            activityFee: document.getElementById('activityFee'),
+            activityBalance: document.getElementById('activityBalance')
+        };
+        
+        // State variables
+        let currentWithdrawalData = null;
+        let selectedPaymentMethod = null;
+        
+        // Format currency
+        function formatCurrency(num) {
+            return num.toLocaleString('en-ZA', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+        
+        // Update dashboard
+        function updateDashboard(user) {
+            if (!user || !user.investment) return;
+            
+            elements.userName.textContent = user.name;
+            const investment = user.investment;
+            
+            elements.initialAmount.textContent = formatCurrency(investment.initial);
+            elements.currentAmount.textContent = formatCurrency(investment.current);
+            elements.profitAmount.textContent = formatCurrency(investment.totalProfit);
+            
+            const growthPercent = Math.round((investment.totalProfit / investment.initial) * 100);
+            elements.growthPercent.textContent = growthPercent;
+            elements.progressBar.style.width = Math.min(growthPercent, 100) + '%';
+            
+            elements.avgMonthly.textContent = investment.monthlyReturn + '%';
+            elements.months.textContent = investment.months;
+            
+            const monthlyProfit = Math.round(investment.totalProfit / investment.months);
+            elements.monthlyProfit.textContent = formatCurrency(monthlyProfit);
+            
+            elements.availableAmount.textContent = formatCurrency(investment.available);
+            const feeAmount = investment.available * 0.25;
+            elements.feeAmount.textContent = formatCurrency(feeAmount);
+            elements.netAmount.textContent = formatCurrency(investment.available - feeAmount);
+            
+            elements.activityInitial.textContent = formatCurrency(investment.initial) + '.00';
+            elements.activityProfit1.textContent = formatCurrency(monthlyProfit) + '.00';
+            elements.activityProfit2.textContent = formatCurrency(monthlyProfit - 2500) + '.00';
+            elements.activityFee.textContent = '2,500.00';
+            elements.activityBalance.textContent = formatCurrency(investment.available) + '.00';
+            
+            if (user.firstLogin) {
+                setTimeout(() => {
+                    alert(`Welcome ${user.name}! Your investment account has R ${formatCurrency(investment.initial)} available.`);
+                    user.firstLogin = false;
+                    database.saveUsers();
+                }, 500);
+            }
+        }
+        
+        // Event Listeners
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+        
+        function showLoginModal() {
+            elements.loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        elements.loginBtn.addEventListener('click', showLoginModal);
+        elements.heroLoginBtn.addEventListener('click', showLoginModal);
+        elements.registerBtn.addEventListener('click', showLoginModal);
+        
+        function closeLoginModal() {
+            elements.loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        elements.closeModal.addEventListener('click', closeLoginModal);
+        
+        // Tab switching
+        elements.tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                elements.tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                elements.tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${tabId}-tab`) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Login form
+        elements.loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            const result = database.login(email, password);
+            if (result.success) {
+                alert('Login successful!');
+                closeLoginModal();
+                elements.dashboard.style.display = 'block';
+                updateDashboard(result.user);
+                window.scrollTo({
+                    top: elements.dashboard.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            } else {
+                alert(result.message);
+            }
+        });
+        
+        // Register form
+        elements.registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value.trim();
+            const email = document.getElementById('registerEmail').value.trim().toLowerCase();
+            const phone = document.getElementById('registerPhone').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            const confirm = document.getElementById('registerConfirm').value;
+            
+            if (!name || !email || !phone || !password || !confirm) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            
+            if (password !== confirm) {
+                alert('Passwords do not match.');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long.');
+                return;
+            }
+            
+            const result = database.register(email, password, name, phone);
+            if (result.success) {
+                database.login(email, password);
+                closeLoginModal();
+                elements.dashboard.style.display = 'block';
+                updateDashboard(result.user);
+                window.scrollTo({
+                    top: elements.dashboard.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                elements.tabs[0].click();
+                elements.registerForm.reset();
+            } else {
+                alert(result.message);
+            }
+        });
+        
+        // Logout
+        elements.logoutBtn.addEventListener('click', function() {
+            database.logout();
+            elements.dashboard.style.display = 'none';
+            alert('You have been logged out successfully.');
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Withdrawal request
+        elements.withdrawalBtn.addEventListener('click', function() {
+            const user = database.getCurrentUser();
+            if (!user) {
+                alert('Please login first.');
+                showLoginModal();
+                return;
+            }
+            
+            if (user.investment.available <= 0) {
+                alert('No funds available for withdrawal.');
+                return;
+            }
+            
+            const withdrawalAmount = user.investment.available;
+            const feeAmount = withdrawalAmount * 0.25;
+            const netAmount = withdrawalAmount - feeAmount;
+            const reference = database.generateWithdrawalId();
+            
+            document.getElementById('paymentAmount').textContent = 'R ' + formatCurrency(feeAmount);
+            document.getElementById('withdrawalAmount').textContent = formatCurrency(withdrawalAmount);
+            document.getElementById('paymentNetAmount').textContent = formatCurrency(netAmount);
+            document.getElementById('paymentReference').textContent = reference.slice(2);
+            document.getElementById('bankAmount').textContent = formatCurrency(feeAmount);
+            document.getElementById('bankReference').textContent = reference.slice(2);
+            
+            selectedPaymentMethod = null;
+            elements.paymentMethods.forEach(method => method.classList.remove('selected'));
+            document.querySelectorAll('.real-payment-gateway').forEach(gateway => {
+                gateway.classList.remove('active');
+            });
+            
+            currentWithdrawalData = {
+                amount: withdrawalAmount,
+                fee: feeAmount,
+                netAmount: netAmount,
+                reference: reference,
+                userEmail: user.email
+            };
+            
+            elements.paymentModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Payment method selection
+        elements.paymentMethods.forEach(method => {
+            method.addEventListener('click', function() {
+                elements.paymentMethods.forEach(m => m.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedPaymentMethod = this.dataset.method;
+                
+                // Hide all gateways
+                document.querySelectorAll('.real-payment-gateway').forEach(gateway => {
+                    gateway.classList.remove('active');
+                });
+                
+                // Show selected gateway
+                if (selectedPaymentMethod === 'paystack') {
+                    document.getElementById('paystackGateway').classList.add('active');
+                } else if (selectedPaymentMethod === 'bank') {
+                    document.getElementById('bankGateway').classList.add('active');
+                } else if (selectedPaymentMethod === 'flutterwave') {
+                    document.getElementById('flutterwaveGateway').classList.add('active');
+                }
+            });
+        });
+        
+        // Process payment
+        elements.confirmPaymentBtn.addEventListener('click', async function() {
+            if (!selectedPaymentMethod) {
+                alert('Please select a payment method.');
+                return;
+            }
+            
+            if (!currentWithdrawalData) return;
+            
+            const user = database.getCurrentUser();
+            if (!user) return;
+            
+            // Show processing message
+            elements.confirmPaymentBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            elements.confirmPaymentBtn.disabled = true;
+            
+            try {
+                let paymentResult;
+                
+                if (selectedPaymentMethod === 'paystack') {
+                    // Process Paystack payment
+                    paymentResult = await database.paymentGateway.processPaystackPayment(
+                        user.email,
+                        currentWithdrawalData.fee,
+                        currentWithdrawalData.reference
+                    );
+                } else if (selectedPaymentMethod === 'flutterwave') {
+                    // Process Flutterwave payment
+                    paymentResult = await database.paymentGateway.processFlutterwavePayment(
+                        user.email,
+                        currentWithdrawalData.fee,
+                        currentWithdrawalData.reference
+                    );
+                } else if (selectedPaymentMethod === 'bank') {
+                    // Bank transfer - just record it
+                    paymentResult = {
+                        success: true,
+                        reference: currentWithdrawalData.reference,
+                        message: 'Bank transfer details provided'
+                    };
+                }
+                
+                if (paymentResult.success) {
+                    // Create withdrawal record
+                    const withdrawal = await database.createWithdrawal(
+                        user.email,
+                        currentWithdrawalData.amount,
+                        currentWithdrawalData.fee,
+                        currentWithdrawalData.netAmount,
+                        selectedPaymentMethod,
+                        paymentResult
+                    );
+                    
+                    // Update success modal
+                    document.getElementById('successReference').textContent = withdrawal.reference;
+                    document.getElementById('successAmount').textContent = formatCurrency(currentWithdrawalData.fee);
+                    document.getElementById('successNetAmount').textContent = formatCurrency(currentWithdrawalData.netAmount);
+                    
+                    // Show success modal
+                    elements.paymentModal.style.display = 'none';
+                    elements.paymentSuccessModal.style.display = 'flex';
+                    
+                    // Update dashboard
+                    updateDashboard(user);
+                } else {
+                    alert('Payment failed: ' + paymentResult.message);
+                }
+            } catch (error) {
+                alert('Payment error: ' + error.message);
+            } finally {
+                elements.confirmPaymentBtn.innerHTML = '<i class="fas fa-lock"></i> Proceed to Payment';
+                elements.confirmPaymentBtn.disabled = false;
+            }
+        });
+        
+        // Cancel payment
+        elements.cancelPaymentBtn.addEventListener('click', function() {
+            elements.paymentModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentWithdrawalData = null;
+            selectedPaymentMethod = null;
+        });
+        
+        // Close success modal
+        elements.closeSuccessBtn.addEventListener('click', function() {
+            elements.paymentSuccessModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentWithdrawalData = null;
+            selectedPaymentMethod = null;
+        });
+        
+        // Calculator
+        elements.calculateBtn.addEventListener('click', function() {
+            const user = database.getCurrentUser();
+            
+            let initial, period, profitPercent, feePercent;
+            
+            if (user && user.investment) {
+                initial = user.investment.initial;
+                period = user.investment.months;
+                profitPercent = user.investment.monthlyReturn;
+                feePercent = 10;
+                
+                document.getElementById('initialInvestment').value = initial;
+                document.getElementById('investmentPeriod').value = period;
+                document.getElementById('monthlyProfit').value = profitPercent;
+                document.getElementById('withdrawalFee').value = feePercent;
+            } else {
+                initial = parseFloat(document.getElementById('initialInvestment').value) || 250000;
+                period = parseInt(document.getElementById('investmentPeriod').value) || 12;
+                profitPercent = parseFloat(document.getElementById('monthlyProfit').value) || 15;
+                feePercent = parseFloat(document.getElementById('withdrawalFee').value) || 10;
+            }
+            
+            const profit = initial * (profitPercent / 100) * period;
+            const total = initial + profit;
+            const fee = profit * (feePercent / 100);
+            const net = total - fee;
+            
+            document.getElementById('resultInitial').textContent = formatCurrency(initial);
+            document.getElementById('resultProfit').textContent = formatCurrency(profit);
+            document.getElementById('resultTotal').textContent = formatCurrency(total);
+            document.getElementById('resultFeePercent').textContent = feePercent;
+            document.getElementById('resultFee').textContent = formatCurrency(fee);
+            document.getElementById('resultNet').textContent = formatCurrency(net);
+        });
+        
+        // Close modals on outside click
+        window.addEventListener('click', function(e) {
+            if (e.target === elements.loginModal) closeLoginModal();
+            if (e.target === elements.paymentModal) {
+                elements.paymentModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                currentWithdrawalData = null;
+                selectedPaymentMethod = null;
+            }
+            if (e.target === elements.paymentSuccessModal) {
+                elements.paymentSuccessModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                currentWithdrawalData = null;
+                selectedPaymentMethod = null;
+            }
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    document.querySelector('nav ul').classList.remove('show');
+                }
+            });
+        });
+        
+        // Testimonials scrolling
+        function createTestimonialsScroll() {
+            const testimonialsTrack = document.querySelector('.testimonials-track');
+            if (!testimonialsTrack) return;
+            
+            const testimonials = testimonialsTrack.innerHTML;
+            testimonialsTrack.innerHTML += testimonials;
+            
+            const testimonialsCount = document.querySelectorAll('.testimonial-card').length;
+            const animationDuration = Math.max(30, testimonialsCount * 5);
+            testimonialsTrack.style.animationDuration = `${animationDuration}s`;
+        }
+        
+        // Initialize
+        window.addEventListener('load', function() {
+            elements.calculateBtn.click();
+            
+            const currentUser = database.getCurrentUser();
+            if (currentUser) {
+                elements.dashboard.style.display = 'block';
+                updateDashboard(currentUser);
+            }
+            
+            createTestimonialsScroll();
+            
+            // Pause testimonials on hover
+            const testimonialsTrack = document.querySelector('.testimonials-track');
+            if (testimonialsTrack) {
+                testimonialsTrack.addEventListener('mouseenter', function() {
+                    this.style.animationPlayState = 'paused';
+                });
+                
+                testimonialsTrack.addEventListener('mouseleave', function() {
+                    this.style.animationPlayState = 'running';
+                });
+            }
+        });
+        
+        // Header scroll behavior
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const header = document.getElementById('mainHeader');
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+    </script>
+</body>
+</html>
