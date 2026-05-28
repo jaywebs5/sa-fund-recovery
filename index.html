@@ -1,1 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aurora Crypto — Client Dashboard</title>
 
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.06);
+      --accent1: #7afcff;
+      --accent2: #8b5cf6;
+      --muted: rgba(255,255,255,0.6);
+      --success: #4ade80;
+      --danger: #fb7185;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{height:100%;margin:0;background:
+      radial-gradient(1000px 400px at 10% 10%, rgba(123,92,246,0.18), transparent 8%),
+      radial-gradient(900px 300px at 90% 90%, rgba(122,252,255,0.06), transparent 12%),
+      var(--bg);
+      color:#e8eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Layout */
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:32px;
+      padding:28px;
+    }
+
+    /* Left: login / welcome column */
+    .panel{
+      width:420px;
+      max-width:95%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:22px;
+      box-shadow: 0 6px 30px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+
+    .brand{
+      display:flex; gap:12px; align-items:center; margin-bottom:14px;
+    }
+    .logo{
+      width:56px;height:56px;border-radius:12px;
+      background: linear-gradient(135deg,var(--accent2),var(--accent1));
+      box-shadow: 0 6px 18px rgba(122,92,246,0.22), 0 2px 6px rgba(122,252,255,0.06) inset;
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#05142a;
+      font-size:18px;
+    }
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:0;font-size:13px;color:var(--muted)}
+
+    label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+    input[type="email"], input[type="password"]{
+      width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.04);
+      background: rgba(4,8,20,0.45); color:inherit; outline:none; font-size:14px;
+      box-shadow: 0 2px 8px rgba(2,6,23,0.35) inset;
+    }
+
+    .muted{color:var(--muted);font-size:13px;margin-top:8px}
+
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;
+      border:0; cursor:pointer; font-weight:600; font-size:14px;
+      background: linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:#05142a; box-shadow: 0 10px 30px rgba(123,92,246,0.14);
+    }
+
+    .tiny {font-size:12px;padding:8px 10px;border-radius:8px}
+
+    /* Right: dashboard column */
+    .dashboard{
+      flex:1;
+      min-width:460px;
+      max-width:1100px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:20px;
+      align-items:start;
+    }
+
+    .card{
+      background: var(--card);
+      border-radius:14px;
+      padding:16px;
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+    }
+
+    /* top summary */
+    .summary{
+      grid-column:1 / -1;
+      display:flex; gap:18px; align-items:center; justify-content:space-between;
+      padding:18px;
+    }
+    .funds{
+      display:flex; gap:18px; align-items:center;
+    }
+    .funds .amount{
+      font-size:28px; font-weight:700; letter-spacing:0.6px;
+      background: linear-gradient(90deg,var(--accent1),var(--accent2));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .funds small{display:block;color:var(--muted);font-size:13px}
+    .timebox{color:var(--muted);font-size:13px;text-align:right}
+
+    /* charts and transactions */
+    .chart-wrap{height:320px; display:flex; flex-direction:column; gap:12px}
+    .chart-canvas{flex:1; padding:8px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); border-radius:10px}
+
+    .transactions{
+      display:flex; flex-direction:column; gap:10px; max-height:320px; overflow:auto;
+    }
+    table{width:100%; border-collapse:collapse; font-size:13px}
+    th,td{padding:8px 10px; text-align:left}
+    tr{border-bottom:1px dashed rgba(255,255,255,0.02)}
+    .tx-type{font-weight:700;padding:6px 8px;border-radius:8px}
+    .credit{background:linear-gradient(90deg, rgba(74,222,128,0.12), rgba(74,222,128,0.04)); color:var(--success)}
+    .debit{background:linear-gradient(90deg, rgba(251,113,133,0.08), rgba(251,113,133,0.02)); color:var(--danger)}
+
+    /* action buttons */
+    .actions{display:flex; gap:12px; margin-top:8px}
+    .action-button{
+      flex:1;
+      padding:12px 10px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      color:var(--muted);
+      font-weight:700;
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease;
+    }
+    .action-button:hover{transform:translateY(-4px); box-shadow: 0 18px 40px rgba(10,14,40,0.5)}
+    .action-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#05142a}
+
+    /* responsive */
+    @media (max-width:980px){
+      .dashboard{grid-template-columns: 1fr; min-width:0}
+      .panel{order:2}
+    }
+
+    /* small helper */
+    .muted-2{color:rgba(255,255,255,0.45);font-size:12px}
+    .pill{display:inline-block;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.02);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- LEFT: Login Panel -->
+    <div class="panel" id="loginPanel" aria-live="polite">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">A</div>
+        <div>
+          <h1>Aurora Crypto</h1>
+          <p>Secure client portal — Real</p>
+        </div>
+      </div>
+
+      <form id="loginForm" onsubmit="event.preventDefault(); doLogin();">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@company.com" required value="client@example.com" />
+
+        <div style="height:12px"></div>
+
+        <label for="pwd">Password</label>
+        <input id="pwd" type="password" placeholder="••••••••" required value="Real1234" />
+
+        <div style="height:14px"></div>
+
+        <button class="btn" type="submit" aria-label="Sign in">Sign in</button>
+
+        <div class="muted" style="display:flex;justify-content:space-between;align-items:center">
+          <span>Real environment — simulated data</span>
+          <a href="#" style="color:var(--accent1); text-decoration:none; font-size:13px">Need help?</a>
+        </div>
+      </form>
+
+      <hr style="border:none;height:1px;background:rgba(255,255,255,0.02);margin:16px 0;border-radius:4px" />
+
+      <div class="muted-2">
+        <strong>Quick facts</strong>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <span class="pill">2FA: enabled</span>
+          <span class="pill">Last login: 2025-09-08</span>
+          <span class="pill">Region: South Africa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Dashboard (hidden until login) -->
+    <div class="dashboard" id="dashboard" style="display:none" aria-live="polite">
+      <div class="card summary" role="region" aria-label="Account summary">
+        <div class="funds">
+          <div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="font-size:12px;color:var(--muted)">Client</div>
+              <div style="font-size:13px;background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px">VIP</div>
+            </div>
+            <div style="height:10px"></div>
+            <div class="amount" id="clientAmount">R 8 808 566.00</div>
+            <small style="display:block;margin-top:6px;color:var(--muted)">Total portfolio value (ZAR)</small>
+          </div>
+        </div>
+
+        <div class="timebox">
+          <div id="liveTime">—</div>
+          <div style="margin-top:6px;color:var(--muted);font-size:13px" id="tzInfo">Local Time</div>
+        </div>
+      </div>
+
+      <!-- Left column main content -->
+      <div class="card">
+        <h3 style="margin:0 0 8px 0">Market overview</h3>
+        <div class="chart-wrap">
+          <div class="chart-canvas">
+            <canvas id="marketChart" width="400" height="200" aria-label="Market line chart"></canvas>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;justify-content:space-between">
+            <div style="display:flex;gap:10px;align-items:center">
+              <div style="font-size:13px;color:var(--muted)">24h change</div>
+              <div style="font-weight:800;color:var(--success)">+3.17%</div>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:center">
+              <div class="muted-2">BTC • ETH • XRP</div>
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--accent1)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column: forex + actions -->
+      <div class="card" style="display:flex;flex-direction:column;gap:12px">
+        <h4 style="margin:0">Forex snapshot</h4>
+        <div style="height:200px" class="chart-canvas">
+          <canvas id="forexChart" width="300" height="180" aria-label="Forex graph"></canvas>
+        </div>
+
+        <div class="muted-2">Recent transactions</div>
+        <div class="transactions card" style="padding:8px;">
+          <table aria-label="Previous transactions">
+            <thead>
+              <tr>
+                <th>Date</th><th>Details</th><th style="text-align:right">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="txBody">
+              <!-- JS will populate -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="actions" role="group" aria-label="Account actions">
+          <button class="action-button action-primary" onclick="actionReinvest()">Reinvest</button>
+          <button class="action-button" onclick="actionGoals()">Goals Account</button>
+          <button class="action-button" onclick="actionWithdraw()">Withdrawal</button>
+        </div>
+      </div>
+
+      <!-- bottom full width: transactions table expanded -->
+      <div class="card" style="grid-column:1 / -1">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <h3 style="margin:0">Transaction history</h3>
+          <div class="muted-2">Showing last 10 transactions</div>
+        </div>
+
+        <div style="height:12px"></div>
+
+        <div style="overflow:auto">
+          <table aria-label="Full transaction table">
+            <thead>
+              <tr>
+                <th>Date</th><th>Type</th><th>Asset</th><th>Details</th><th style="text-align:right">Amount (ZAR)</th><th style="text-align:right">Balance</th>
+              </tr>
+            </thead>
+            <tbody id="fullTxBody">
+              <!-- JS populate -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div> <!-- dashboard -->
+  </div>
+
+  <script>
+    // ----- Simulated data -----
+    const clientAmount = 8808566.00; // given amount
+    const sampleTx = [
+      {date:'2025-09-09 09:45', details:'BTC sale', amt: 125000.00, type:'credit', asset:'BTC', balance: 8808566.00},
+      {date:'2025-09-08 18:12', details:'ETH purchase', amt:-54000.00, type:'debit', asset:'ETH', balance: 8683566.00},
+      {date:'2025-09-07 14:02', details:'Dividend payout', amt:4200.00, type:'credit', asset:'USDT', balance: 8737566.00},
+      {date:'2025-09-06 08:30', details:'Withdrawal', amt:-45000.00, type:'debit', asset:'ZAR', balance: 8733366.00},
+      {date:'2025-09-05 16:28', details:'Staking reward', amt:11500.00, type:'credit', asset:'ADA', balance: 8778366.00},
+      {date:'2025-09-04 11:20', details:'BTC purchase', amt:-280000.00, type:'debit', asset:'BTC', balance: 8766866.00},
+      {date:'2025-09-03 10:05', details:'Portfolio rebalance', amt:-9000.00, type:'debit', asset:'MULTI', balance: 9046866.00},
+      {date:'2025-09-02 12:13', details:'Referral bonus', amt:1500.00, type:'credit', asset:'ZAR', balance: 9055866.00},
+      {date:'2025-09-01 09:00', details:'Interest', amt:3600.00, type:'credit', asset:'USDC', balance: 9054366.00},
+      {date:'2025-08-31 23:55', details:'Margin fee', amt:-600.00, type:'debit', asset:'ZAR', balance: 9050766.00},
+    ];
+
+    // ----- UI helpers -----
+    function formatZAR(n){
+      // simple ZAR format with thousands separators and fixed 2 decimals
+      return n.toLocaleString('en-ZA', {minimumFractionDigits:2, maximumFractionDigits:2});
+    }
+
+    function populateTransactions(){
+      const txBody = document.getElementById('txBody');
+      const fullBody = document.getElementById('fullTxBody');
+      txBody.innerHTML = '';
+      fullBody.innerHTML = '';
+      // show 5 most recent in the right column, full list below
+      for(let i=0;i<sampleTx.length;i++){
+        const t = sampleTx[i];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="white-space:nowrap">${t.date}</td>
+          <td>${t.details}</td>
+          <td style="text-align:right">${t.amt>0? '+R ' + formatZAR(t.amt) : '-R ' + formatZAR(Math.abs(t.amt))}</td>
+        `;
+        txBody.appendChild(tr);
+
+        const tr2 = document.createElement('tr');
+        tr2.innerHTML = `
+          <td style="white-space:nowrap">${t.date}</td>
+          <td><span class="tx-type ${t.type==='credit'?'credit':'debit'}">${t.type.toUpperCase()}</span></td>
+          <td>${t.asset}</td>
+          <td>${t.details}</td>
+          <td style="text-align:right">${t.amt>0? '+R ' + formatZAR(t.amt) : '-R ' + formatZAR(Math.abs(t.amt))}</td>
+          <td style="text-align:right">R ${formatZAR(t.balance)}</td>
+        `;
+        fullBody.appendChild(tr2);
+      }
+    }
+
+    // ----- Charts (Chart.js) -----
+    function makeCharts(){
+      const marketCtx = document.getElementById('marketChart').getContext('2d');
+      // Sample market data: simulated multi-asset composite index
+      const labels = ['00:00','02:00','04:00','06:00','08:00','10:00','12:00','14:00','16:00','18:00','20:00','22:00'];
+      const prices = [1000,1020,1012,1030,1048,1043,1056,1068,1074,1070,1085,1092];
+
+      new Chart(marketCtx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Aurora Index',
+              data: prices,
+              tension: 0.28,
+              borderWidth: 2,
+              pointRadius: 0,
+              fill: true,
+              backgroundColor: (ctx) => {
+                const gradient = marketCtx.createLinearGradient(0,0,0,220);
+                gradient.addColorStop(0, 'rgba(122,92,246,0.22)');
+                gradient.addColorStop(1, 'rgba(122,252,255,0.02)');
+                return gradient;
+              },
+              borderColor: 'rgba(122,92,246,0.96)'
+            }
+          ]
+        },
+        options: {
+          responsive:true,
+          maintainAspectRatio:false,
+          plugins:{
+            legend:{display:false},
+            tooltip:{mode:'index',intersect:false}
+          },
+          scales:{
+            x:{grid:{display:false}, ticks:{color:'rgba(255,255,255,0.5)'}},
+            y:{grid:{color:'rgba(255,255,255,0.03)'}, ticks:{color:'rgba(255,255,255,0.5)'}}
+          }
+        }
+      });
+
+      // Forex chart (multi-line)
+      const forexCtx = document.getElementById('forexChart').getContext('2d');
+      new Chart(forexCtx, {
+        type:'line',
+        data:{
+          labels:['Mon','Tue','Wed','Thu','Fri'],
+          datasets:[
+            {
+              label:'USD/ZAR',
+              data:[18.45,18.52,18.48,18.60,18.55],
+              borderWidth:2, tension:0.3, pointRadius:3, borderColor:'rgba(122,252,255,0.95)'
+            },
+            {
+              label:'EUR/ZAR',
+              data:[19.98,20.05,20.00,20.12,20.07],
+              borderWidth:2, tension:0.3, pointRadius:3, borderColor:'rgba(139,92,246,0.95)'
+            }
+          ]
+        },
+        options:{
+          responsive:true, maintainAspectRatio:false,
+          plugins:{legend:{position:'bottom',labels:{color:'rgba(255,255,255,0.65)'}}},
+          scales:{
+            x:{grid:{display:false}, ticks:{color:'rgba(255,255,255,0.5)'}},
+            y:{grid:{color:'rgba(255,255,255,0.03)'}, ticks:{color:'rgba(255,255,255,0.5)'}}
+          }
+        }
+      });
+    }
+
+    // ----- Time display -----
+    function startTime(){
+      const live = document.getElementById('liveTime');
+      const tzInfo = document.getElementById('tzInfo');
+      function update(){
+        // Use user's locale time; explicitly show date + time
+        const now = new Date();
+        const dateStr = now.toLocaleString('en-GB', {timeZoneName:'short'});
+        live.textContent = dateStr;
+        tzInfo.textContent = 'Local time';
+      }
+      update();
+      setInterval(update, 1000);
+    }
+
+    // ----- Login simulation -----
+    function doLogin(){
+      // simple progress / reveal
+      const loginPanel = document.getElementById('loginPanel');
+      const dash = document.getElementById('dashboard');
+      // fake verification animation
+      const btn = document.querySelector('#loginForm .btn');
+      btn.disabled = true;
+      btn.textContent = 'Signing in...';
+      setTimeout(()=> {
+        loginPanel.style.display = 'none';
+        dash.style.display = 'grid';
+        btn.disabled = false;
+        btn.textContent = 'Sign in';
+        // populate UI
+        document.getElementById('clientAmount').textContent = 'R ' + formatZAR(clientAmount);
+        populateTransactions();
+        makeCharts();
+        startTime();
+      }, 700); // brief simulated delay for effect
+    }
+
+    // ----- Action handlers -----
+    function actionReinvest(){
+      alert('Reinvest clicked — this will open the Reinvestment flow (Real).');
+    }
+    function actionGoals(){
+      alert('Goals Account clicked — open goals & savings (Real).');
+    }
+    function actionWithdraw(){
+      const ok = confirm('Start withdrawal process? This will simulate a withdrawal of R 50 000.');
+      if(ok){
+        // push new tx to top
+        const amt = -50000;
+        const now = new Date();
+        const date = now.toLocaleString('en-GB').replace(',', '');
+        const newBal = sampleTx.length ? sampleTx[0].balance + amt : clientAmount + amt;
+        sampleTx.unshift({date, details:'Withdrawal (simulated)', amt: amt, type:'debit', asset:'ZAR', balance: newBal});
+        // update displayed amounts
+        document.getElementById('clientAmount').textContent = 'R ' + formatZAR(newBal);
+        populateTransactions();
+        makeCharts(); // optional refresh
+      }
+    }
+
+    // Start with login visible
+    // Optionally autologin for Real:
+    // Uncomment to auto-login on page load:
+    // window.addEventListener('load', doLogin);
+
+  </script>
+</body>
+</html>
+	
